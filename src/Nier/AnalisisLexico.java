@@ -38,7 +38,7 @@ public class AnalisisLexico {
 		}
 
 		if(contErrores==-1) {
-			System.out.println("*****No ubo errores Léxicos*****");
+			System.out.println("*****No hubo errores Léxicos*****");
 		}else {
 			System.out.println("*****Lista de Errores*****");
 			System.out.print("\n|      No.      |          Error          |");
@@ -197,4 +197,6 @@ public class AnalisisLexico {
 	public int getContNombres() {
 		return contNombres;
 	}
+	
+	
 }

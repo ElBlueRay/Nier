@@ -28,7 +28,7 @@ public class AnalisisSintactico {
 
 
 		if(contErrores==-1) {
-			System.out.println("*****No ubo errores Sintácticos*****");
+			System.out.println("*****No hubo errores Sintácticos*****");
 		}else {
 			System.out.println("*****Lista de Errores*****");
 			System.out.print("\n|      No.      |          Error          |");

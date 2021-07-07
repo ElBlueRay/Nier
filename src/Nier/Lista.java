@@ -19,7 +19,7 @@ public class Lista <T>{
 		}
 		if(Frente==null)// Insertando el primer nodo de la lista
 			Frente=Fin=Nuevo;
-		else {// Insertamso el nuevo nodo al final de la lista
+		else {// Insertamos el nuevo nodo al final de la lista
 			Fin.setSig(Nuevo);
 			Fin=Nuevo;
 		}
