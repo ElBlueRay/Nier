@@ -1,1 +1,1 @@
-public class ejemplo_23 ( public int ab_12 = 1; public int ab_13 = 3; public boolean cd_34 = true; private int fg_56 = 2; private boolean hi_78 = false; if (cd_34 > fg_56) while (3 =< 9) if (4 > ab_12) while (hi_78 << 9) public int jk_91 = 6; public boolean lm_23 = true; )
+public class ejemplo_23 ( public int ab_12 = 1; int ab_12; public int ab_13 = 3; public boolean cd_34 = true; private int fg_56 = 2; private boolean hi_78 = false; if (cd_34 > fg_56) while (3 =< 9) if (4 > ab_12) while (hi_78 < 9) public int jk_91 = 6; public boolean lm_23 = true; )

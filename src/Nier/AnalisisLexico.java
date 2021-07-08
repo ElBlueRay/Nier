@@ -38,7 +38,7 @@ public class AnalisisLexico {
 		}
 
 		if(contErrores==-1) {
-			System.out.println("*****No hubo errores Léxicos*****");
+			System.out.println("*****No ubo errores Léxicos*****");
 		}else {
 			System.out.println("*****Lista de Errores*****");
 			System.out.print("\n|      No.      |          Error          |");
@@ -85,7 +85,7 @@ public class AnalisisLexico {
 	}
 
 	private void Tipo (String token) {
-		String v[] = {"int","boolean"};
+		String v[] = {"int","boolean","String"};
 
 		if(bandera) {
 			for(int i=0;i<v.length;i++) {
@@ -174,9 +174,9 @@ public class AnalisisLexico {
 				}
 			}
 
-			if(QuitarRepetidos(token)) {
+			/*if(QuitarRepetidos(token)) {
 				return;
-			}
+			}*/
 
 			contNombres++;
 			nombres[contNombres]=token;
@@ -184,19 +184,17 @@ public class AnalisisLexico {
 
 	}
 	
-	private boolean QuitarRepetidos(String token) {
+	private void QuitarRepetidos(String token) {
 		
 		for(int i=0;i<contNombres+1;i++) {
 			if(token.equals(nombres[i])) {
-				return true;
+				return ;
 			}	
 		}
-		return false;
+		return;
 	}
 
 	public int getContNombres() {
 		return contNombres;
 	}
-	
-	
 }

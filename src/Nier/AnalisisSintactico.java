@@ -28,7 +28,7 @@ public class AnalisisSintactico {
 
 
 		if(contErrores==-1) {
-			System.out.println("*****No hubo errores Sintácticos*****");
+			System.out.println("*****No ubo errores Sintácticos*****");
 		}else {
 			System.out.println("*****Lista de Errores*****");
 			System.out.print("\n|      No.      |          Error          |");
@@ -260,7 +260,7 @@ public class AnalisisSintactico {
 	}
 
 	private boolean Tipo (String token) {
-		String v[] = {"int","boolean"};
+		String v[] = {"int","boolean","String"};
 
 		for(int i=0;i<v.length;i++) {
 			if(token.equals(v[i])) {

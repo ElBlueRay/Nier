@@ -1,29 +1,27 @@
 package Nier;
 
 public class AnalisisSemantico {
-	/*
-	 * Mira w, nombre es el nombre de la variable tipo es el tipo de la variable
-	 * vamos a comparar el token con el nombre
-	 */
+	
 	private Lista<String> tokens;
-	private String errores[], nombres[], tipos[], tamaños[];
-	private int contErrores, contNombres, pos;
-	private int contLinea; 
-	private String linea[];
-	private String sContL;
+	private String errores[], nombres[], tipos[], tamaños[], linea[], iguales[], palabra[], errorLinea[];
+	private int contErrores, contNombres, pos, repe;
 
 	public AnalisisSemantico(Lista<String> t, String nombres[], String tipos[], String tamaños[], int contNombres) {
 		tokens = t;
-		sContL = "";
 		contErrores = -1;
-		this.contLinea = contLinea;
 		pos = 0;
-		this.contNombres = contNombres;
+		iguales = nombres;
+
 		errores = new String[tokens.length()];
-		linea = new String [tokens.length()];
+		linea = new String[tokens.length()];
+		palabra = new String[tokens.length()];
+		errorLinea = new String[tokens.length()];
+
 		this.nombres = nombres;
 		this.tipos = tipos;
 		this.tamaños = tamaños;
+		this.contNombres = contNombres;
+
 	}
 
 	public void Analizador() {
@@ -45,11 +43,11 @@ public class AnalisisSemantico {
 		} else {
 
 			System.out.println("\n\n*****Tabla de Símbolos*****");
-			System.out.print("\n|          Nombre          |      Tipo      |      VALOR      |");
+			System.out.print("\n|Posicion |     Nombre      |      Tipo      |      VALOR      |");
 			System.out.print("\n----------------------------------------------------------------");
 			for (int i = 0; i < contNombres + 1; i++) {
-				System.out.printf("\n%-23s %-16s %-18s %-1s", "|  " + "   " + nombres[i], "   |   " + tipos[i],
-						"   |   " + tamaños[i], "   |");
+				System.out.printf("\n%-23s %-16s %-18s %-1s", "| " + (i + 1) + "|        " + nombres[i],
+						"   |   " + tipos[i], "   |   " + tamaños[i], "   |");
 			}
 			System.out.print("\n----------------------------------------------------------------\n\n");
 
@@ -64,21 +62,26 @@ public class AnalisisSemantico {
 		}
 
 		System.out.println("\n\n*****Errores encontrados*****");
+		System.out.println();
+		ContarErrorLinea();
+		for (int i = 0; i < errorLinea.length; i++) {
+			if (errorLinea[i] == null) {
 
-		for (int i = 0; i < contErrores + 1; i++) {
-			
-			if (errores[i].equals("=")) {
-				System.out.printf("\nHubo un error de signo en la linea " + linea[i] + " el dato es " + errores[i]);
+			} else {
+				System.out.println(errorLinea[i]);
 			}
-			if (errores[i].equals("(") || errores[i].equals(")")) {
-				System.out.printf("\nHubo un error de parentesis en la linea " + linea[i] + " el dato es " + errores[i]);
+
+		}
+		 
+		System.out.println();
+		iguales();
+		for (int i = 0; i < palabra.length; i++) {
+			if (palabra[i] == null) {
+
+			} else {
+				System.out.println(palabra[i]);
 			}
-			if (errores[i].equals("int") || errores[i].equals("boolean")) {
-				System.out.printf("\nHubo un error de variable en la linea " + linea[i] + " el dato es " + errores[i]);
-			}
-			if (errores[i].equals("{") || errores[i].equals("}")) {
-				System.out.printf("\nHay parentesis de mas en la linea " + linea[i] + " el dato es " + errores[i]);
-			}
+
 		}
 	}
 
@@ -192,6 +195,7 @@ public class AnalisisSemantico {
 	private boolean Statements(Nodo<String> Aux) {
 
 		while (Aux != null) {
+
 			if (Modificadores(Aux.getInfo())) {
 				String auxTipo = "", auxId;
 				boolean bandera = false;
@@ -207,8 +211,6 @@ public class AnalisisSemantico {
 					if (bandera) {
 						Buscar(Aux.getInfo());
 						tipos[pos] = auxTipo;
-						linea[pos] = auxTipo;
-						BuscarLineas(Aux.getInfo());
 					}
 					auxId = Aux.getInfo();
 
@@ -221,15 +223,10 @@ public class AnalisisSemantico {
 							if (Literals(Aux.getInfo())) {
 								Buscar(auxId);
 								tamaños[pos] = Aux.getInfo();
-								BuscarLineas(auxId);
-							//	linea[] = Aux.getInfo();
 							}
 							if (!Aux.getInfo().equals(";")) {
 								Aux = Aux.getSig();
 								SimboloEspecialPuntoComa(Aux.getInfo());
-							//	contLineas(Aux.getInfo());12
-								
-								
 							}
 						}
 					}
@@ -261,6 +258,7 @@ public class AnalisisSemantico {
 					}
 				}
 			}
+
 			Aux = Aux.getSig();
 		}
 
@@ -293,7 +291,7 @@ public class AnalisisSemantico {
 	}
 
 	private boolean Tipo(String token) {
-		String v[] = { "int", "boolean" };
+		String v[] = { "int", "boolean", "String" };
 
 		for (int i = 0; i < v.length; i++) {
 			if (token.equals(v[i])) {
@@ -339,24 +337,11 @@ public class AnalisisSemantico {
 		return true;
 
 	}
-	
-  /*	private void contLineas(String token) {
-		for(int i=0; i<token.length();i++) {
-		if (token.equals(";")) {
-			contLinea++;
-			sContL = contLinea+"";
-			linea[i] = sContL;
-			return;
-			}
-		linea[i] = sContL;
-		}
-		}
-	*/
 
 	private void SimboloEspecialPuntoComa(String token) {
 		if (token.equals(";")) {
-				return;
-			}
+			return;
+		}
 		contErrores++;
 		errores[contErrores] = token;
 	}
@@ -451,13 +436,6 @@ public class AnalisisSemantico {
 		}
 		return true;
 	}
-	private void BuscarLineas(String token) {
-		for (int i = 0; i < contLinea + 1; i++) {
-			if (token.equals(linea[i])) {
-				pos = i;
-			}
-		}
-	}
 
 	private void Buscar(String token) {
 		for (int i = 0; i < contNombres + 1; i++) {
@@ -467,4 +445,71 @@ public class AnalisisSemantico {
 		}
 	}
 
+	private void iguales() {
+		iguales = nombres;
+		for (int i = 0; i < nombres.length; i++) {
+			repe = 0;
+
+			for (int j = 0; j < nombres.length; j++) {
+
+				if (iguales[i] == null) {
+					break;
+				}
+				if (iguales[i].equals(nombres[j]) && tipos[j] == null) {
+					repe++;
+				}
+			}
+
+			if (repe > 1) {
+
+				if (nombres[i] == null) {
+					break;
+				} else {
+					if (tipos[i]==null) {
+					palabra[i] = "se repite " + iguales[i] + " " + repe + " veces, se esta declarando varias veces en la posicion " + (i+1);
+					}
+				}
+			}
+			continue;
+
+		}
+		for (int i = 0; i < palabra.length; i++) {
+			repe = 0;
+			for (int j = 0; j < palabra.length; j++) {
+				if (palabra[i] == null) {
+					break;
+				}
+				if (palabra[i].equals(palabra[j])) {
+
+					repe++;
+					if (repe > 1) {
+						palabra[j] = null;
+
+					}
+				}
+			}
+		}
+	}
+
+	public void ContarErrorLinea() {
+		for (int i = 0; i < errores.length; i++) {
+			for (int j = 0; j < errores.length; j++) {
+				if (nombres[i] == null) {
+					break;
+				}
+				if (nombres[i].equals(errores[j])) {
+					if (tipos[i]==null) {
+						errorLinea[i] = "hay un error en la linea: " + (i + 1) + " ,el nombre del error es: "
+								+ nombres[i] + " la variable no se ha inicializado";
+					} else {
+
+						errorLinea[i] = "hay un error en la linea: " + (i + 1) + " ,el nombre del error es: "
+								+ nombres[i] + " la variable es de tipo : " + tipos[i];
+					}
+				}
+
+			}
+		}
+
+	}
 }

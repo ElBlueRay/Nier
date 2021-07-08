@@ -8,7 +8,7 @@ public class Apl {
 		int c,antC=-1,pos=0;
 		char letra;
 		String token = "", txt="ArchTexto 2.txt";
-		String nombres[],tipos[],tamaños[],linea[];
+		String nombres[],tipos[],tamaños[];
 		Lista<String> tokens = new Lista();
 
 		File ArchTxt = new File (txt);
@@ -154,8 +154,8 @@ public class Apl {
 
 		As.Analizador();
 		
-		AnalisisSemantico Ase = new AnalisisSemantico (tokens,nombres,tipos,tamaños,Al.getContNombres());
-
+		AnalisisSemantico Ase = new AnalisisSemantico(tokens,nombres,tipos,tamaños,Al.getContNombres());
+		
 		Ase.Analizador();
 	}
 

@@ -2,11 +2,11 @@ package Nier;
 
 public class Lista <T>{
 	
-	private Nodo<T> Frente,Fin;
+	private Nodo<T> Detras,Frente,Fin;
 	private T       Dr;
 	
 	public Lista() {
-		Frente=Fin=null;
+		Frente=Fin=Detras=null;
 		Dr=null;
 	}
 	public boolean InsertarFin(T Dato) {
@@ -19,7 +19,7 @@ public class Lista <T>{
 		}
 		if(Frente==null)// Insertando el primer nodo de la lista
 			Frente=Fin=Nuevo;
-		else {// Insertamos el nuevo nodo al final de la lista
+		else {// Insertamso el nuevo nodo al final de la lista
 			Fin.setSig(Nuevo);
 			Fin=Nuevo;
 		}

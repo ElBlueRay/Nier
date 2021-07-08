@@ -3,11 +3,13 @@ package Nier;
 public class Nodo <T>{
 	
 	private T Info;
+	
 	private Nodo<T> Sig;
 	
 	public Nodo(T Dato) {
 		Info=Dato;
 		Sig=null;
+	
 	}
 	public Nodo<T> getSig() {
 		return Sig;
@@ -17,5 +19,7 @@ public class Nodo <T>{
 	}
 	public T getInfo(){
 		return Info;
-	}	
+	}
+	
+	
 }
