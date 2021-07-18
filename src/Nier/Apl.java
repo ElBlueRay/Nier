@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Apl {
 
-	public static void main(String[] args){
+	public Apl(){
 		int c,antC=-1,pos=0;
 		char letra;
 		String token = "", txt="ArchTexto 2.txt";

@@ -1,9 +1,9 @@
 package Nier;
 
 public class AnalisisSemantico {
-	
+
 	private Lista<String> tokens;
-	private String errores[], nombres[], tipos[], tamaños[], linea[], iguales[], palabra[], errorLinea[];
+	private String errores[], nombres[], tipos[], tamaños[], iguales[], palabra[], errorLinea[];
 	private int contErrores, contNombres, pos, repe;
 
 	public AnalisisSemantico(Lista<String> t, String nombres[], String tipos[], String tamaños[], int contNombres) {
@@ -13,7 +13,6 @@ public class AnalisisSemantico {
 		iguales = nombres;
 
 		errores = new String[tokens.length()];
-		linea = new String[tokens.length()];
 		palabra = new String[tokens.length()];
 		errorLinea = new String[tokens.length()];
 
@@ -72,7 +71,7 @@ public class AnalisisSemantico {
 			}
 
 		}
-		 
+
 		System.out.println();
 		iguales();
 		for (int i = 0; i < palabra.length; i++) {
@@ -465,8 +464,9 @@ public class AnalisisSemantico {
 				if (nombres[i] == null) {
 					break;
 				} else {
-					if (tipos[i]==null) {
-					palabra[i] = "se repite " + iguales[i] + " " + repe + " veces, se esta declarando varias veces en la posicion " + (i+1);
+					if (tipos[i] == null) {
+						palabra[i] = "se repite " + iguales[i] + " " + repe
+								+ " veces, se esta declarando varias veces en la posicion " + (i + 1);
 					}
 				}
 			}
@@ -498,7 +498,7 @@ public class AnalisisSemantico {
 					break;
 				}
 				if (nombres[i].equals(errores[j])) {
-					if (tipos[i]==null) {
+					if (tipos[i] == null) {
 						errorLinea[i] = "hay un error en la linea: " + (i + 1) + " ,el nombre del error es: "
 								+ nombres[i] + " la variable no se ha inicializado";
 					} else {

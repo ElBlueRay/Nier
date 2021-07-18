@@ -1,1 +1,1 @@
-public class ejemplo_23 {  public int ab_12 = 3; boolean ab_13 = false;}
+public class ejemplo_23 { ; public boolean ab_13 = false; public int ab_14 = 113 + public int ab_12 = 12;}
