@@ -1,6 +1,6 @@
 package Nier;
 
-public class cuadruplos {
+public class cuadruplos <T>{
 
 	private String DK[], var;
 	String[] Car;
@@ -49,11 +49,11 @@ public class cuadruplos {
 
 	private void imprimirEntre(Nodo reco) {
 		if (reco != null) {
-			imprimirEntre(reco.izq);
+			imprimirEntre(reco.der);
 			System.out.print(reco.info + " ");
 			Car[y] = reco.info;
 			y++;
-			imprimirEntre(reco.der);
+			imprimirEntre(reco.izq);
 		}
 	}
 
@@ -152,15 +152,13 @@ public class cuadruplos {
 							for (int j = 0; j < Car.length; j++) {
 								if (Car[j].contains(var)) {
 									Car[j] = "DK" + z;
-									;
 								}
 							}
 						}
 					} catch (NullPointerException e) {
-
 					}
-
 				}
+				
 				for (int c = 0; c < Car.length; c++) {
 					try {
 						if (Car[c].equals("*")) {
@@ -187,11 +185,9 @@ public class cuadruplos {
 					} catch (NullPointerException e) {
 
 					}
-
 				}
 			}
 		}
-
 	}
 
 	public void iniciar() {
