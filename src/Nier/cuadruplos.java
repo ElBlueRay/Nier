@@ -198,7 +198,7 @@ public class cuadruplos <T>{
 	public void imprime() {
 		for (int i = 0; i < DK.length; i++) {
 			if (DK[i] == null) {
-				System.out.println("A= " + Car[1]);
+				System.out.println("A= " + Car[2]);
 				break;
 			} else {
 				System.out.println(DK[i]);
